@@ -1,24 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>{{title}}</h1>
+    <SynonymForm />
+    <hr />
+    <SynonymView v-bind:words="words" />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SynonymForm from "./components/SynonymForm";
+import SynonymView from "./components/SynonymView";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    SynonymForm,
+    SynonymView
+  },
+  data() {
+    return {
+      title: "Synonym Form",
+      words: [{ word: "hello" }]
+    };
   }
-}
+};
 </script>
 
 <style>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
