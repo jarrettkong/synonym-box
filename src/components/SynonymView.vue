@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div v-for="word in words" v-bind:key="word.id">
-      <Synonym v-bind:word="word" />
+    <div v-for="synonym in synonyms" v-bind:key="synonym.id">
+      <Synonym v-bind:synonym="synonym" v-bind:updateQuery="updateQuery" />
     </div>
   </div>
 </template>
@@ -16,7 +16,8 @@ export default {
     Synonym
   },
   props: {
-    words: Array
+    synonyms: Array,
+    updateQuery: Function
   }
 };
 </script>

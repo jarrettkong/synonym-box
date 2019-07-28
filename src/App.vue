@@ -1,9 +1,14 @@
 <template>
   <div id="app">
     <h1>{{title}}</h1>
-    <SynonymForm />
+    <SynonymForm v-bind:getSynonyms="getSynonyms" />
     <hr />
-    <SynonymView v-bind:words="words" />
+    <div v-if="error">
+      <h3>{{error}}</h3>
+    </div>
+    <div v-else>
+      <SynonymView v-bind:synonyms="synonyms" v-bind:updateQuery="updateQuery" />
+    </div>
   </div>
 </template>
 
@@ -17,10 +22,28 @@ export default {
     SynonymForm,
     SynonymView
   },
+  methods: {
+    async getSynonyms(word) {
+      try {
+        const res = await fetch(
+          `https://dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${process.env.VUE_APP_DICTIONARY_API_KEY}`
+        );
+        const data = await res.json();
+        this.synonyms = data[0].meta.syns[0];
+        this.error = "";
+      } catch (err) {
+        this.error = `Unable to find any synonyms for "${word}".`;
+      }
+    },
+    async updateQuery(word) {
+      this.getSynonyms(word);
+    }
+  },
   data() {
     return {
       title: "Synonym Form",
-      words: [{ word: "hello" }]
+      synonyms: [],
+      error: ""
     };
   }
 };
