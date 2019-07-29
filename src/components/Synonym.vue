@@ -1,12 +1,12 @@
 <template>
-  <div class="word-item" v-on:click="handleClick">
+  <div class="word-item" @click="handleClick">
     <h3>{{synonym}}</h3>
   </div>
 </template>
 
 <script>
 export default {
-  app: "synonym",
+  app: "Synonym",
   props: {
     synonym: String,
     updateQuery: Function

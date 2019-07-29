@@ -1,6 +1,10 @@
 <template>
   <div>
-    <div v-for="synonym in synonyms" v-bind:key="synonym.id">
+    <h3>
+      <em>Definition</em>
+      : {{ data.definition }}
+    </h3>
+    <div v-for="synonym in data.synonyms" v-bind:key="synonym.id">
       <Synonym v-bind:synonym="synonym" v-bind:updateQuery="updateQuery" />
     </div>
   </div>
@@ -11,12 +15,12 @@
 import Synonym from "./Synonym";
 
 export default {
-  app: "synonym-view",
+  app: "SynonymView",
   components: {
     Synonym
   },
   props: {
-    synonyms: Array,
+    data: Object,
     updateQuery: Function
   }
 };

@@ -1,13 +1,13 @@
 <template>
-  <div id="app">
+  <div class="app">
     <h1>{{title}}</h1>
     <SynonymForm v-bind:getSynonyms="getSynonyms" />
     <hr />
     <div v-if="error">
       <h3>{{error}}</h3>
     </div>
-    <div v-else>
-      <SynonymView v-bind:synonyms="synonyms" v-bind:updateQuery="updateQuery" />
+    <div v-else v-for="data in wordData">
+      <SynonymView v-bind:data="data" v-bind:updateQuery="updateQuery" />
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ import SynonymForm from "./components/SynonymForm";
 import SynonymView from "./components/SynonymView";
 
 export default {
-  name: "app",
+  name: "App",
   components: {
     SynonymForm,
     SynonymView
@@ -29,7 +29,14 @@ export default {
           `https://dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${process.env.VUE_APP_DICTIONARY_API_KEY}`
         );
         const data = await res.json();
-        this.synonyms = data[0].meta.syns[0];
+        const wordData = data.reduce((acc, result) => {
+          acc.push({
+            definition: result.shortdef[0],
+            synonyms: data[0].meta.syns[0]
+          });
+          return acc;
+        }, []);
+        this.wordData = wordData;
         this.error = "";
       } catch (err) {
         this.error = `Unable to find any synonyms for "${word}".`;
@@ -41,8 +48,8 @@ export default {
   },
   data() {
     return {
-      title: "Synonym Form",
-      synonyms: [],
+      title: "SynonymBox",
+      wordData: [],
       error: ""
     };
   }
@@ -55,12 +62,23 @@ export default {
 *::after {
   box-sizing: border-box;
 }
-#app {
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  font-size: 16;
+}
+
+.app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  padding-top: 60px;
+  margin: auto;
+  max-width: 1300px;
 }
 </style>
