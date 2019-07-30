@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="synonym-view">
     <h3>
       <em>Definition</em>
       : {{ data.definition }}
@@ -25,3 +25,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.synonym-view {
+  width: 100%;
+  border: 1px solid red;
+}
+</style>

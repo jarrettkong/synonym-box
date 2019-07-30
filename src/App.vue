@@ -3,12 +3,14 @@
     <h1>{{title}}</h1>
     <SynonymForm v-bind:getSynonyms="getSynonyms" />
     <hr />
-    <div v-if="error">
-      <h3>{{error}}</h3>
-    </div>
-    <div v-else v-for="data in wordData">
-      <SynonymView v-bind:data="data" v-bind:updateQuery="updateQuery" />
-    </div>
+    <output class="app-output">
+      <div v-if="error">
+        <h3>{{error}}</h3>
+      </div>
+      <div v-else v-for="data in wordData">
+        <SynonymView v-bind:data="data" v-bind:updateQuery="updateQuery" />
+      </div>
+    </output>
   </div>
 </template>
 
@@ -77,8 +79,24 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 60px;
+  padding: 50px;
   margin: auto;
   max-width: 1300px;
+}
+
+h1 {
+  font-size: 60px;
+}
+
+hr {
+  margin: 50px 0;
+  border: 0;
+  border-top: 1px solid lightgrey;
+}
+
+.app-output {
+  display: grid;
+  grid-gap: 20px;
+  border: 1px solid blue;
 }
 </style>
