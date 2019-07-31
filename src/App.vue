@@ -31,7 +31,7 @@ export default {
           `https://dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${process.env.VUE_APP_DICTIONARY_API_KEY}`
         );
         const data = await res.json();
-        const wordData = data.reduce((acc, result, i) => {
+        const wordData = data.reduce((acc, result) => {
           acc.push({
             definition: `${result.fl}. ${result.shortdef[0]}`,
             synonyms: result.meta.syns[0]
