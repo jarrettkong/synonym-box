@@ -1,11 +1,13 @@
 <template>
   <div class="synonym-view">
-    <h3>
-      <em>Definition</em>
-      : {{ data.definition }}
+    <h3 class="definition">
+      Definition:
+      <span class="definition-title">{{ data.definition }}</span>
     </h3>
-    <div v-for="synonym in data.synonyms" v-bind:key="synonym.id">
-      <Synonym v-bind:synonym="synonym" v-bind:updateQuery="updateQuery" />
+    <div class="synonym-output">
+      <div v-for="synonym in data.synonyms" v-bind:key="synonym.id">
+        <Synonym v-bind:synonym="synonym" v-bind:updateQuery="updateQuery" />
+      </div>
     </div>
   </div>
 </template>
@@ -26,9 +28,28 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .synonym-view {
   width: 100%;
-  border: 1px solid red;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 0 15px;
+}
+
+.definition {
+  margin-bottom: 0;
+}
+
+.definition-title {
+  font-style: italic;
+  font-weight: normal;
+}
+
+.synonym-output {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 </style>

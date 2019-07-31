@@ -31,10 +31,10 @@ export default {
           `https://dictionaryapi.com/api/v3/references/thesaurus/json/${word}?key=${process.env.VUE_APP_DICTIONARY_API_KEY}`
         );
         const data = await res.json();
-        const wordData = data.reduce((acc, result) => {
+        const wordData = data.reduce((acc, result, i) => {
           acc.push({
-            definition: result.shortdef[0],
-            synonyms: data[0].meta.syns[0]
+            definition: `${result.fl}. ${result.shortdef[0]}`,
+            synonyms: result.meta.syns[0]
           });
           return acc;
         }, []);
@@ -97,6 +97,5 @@ hr {
 .app-output {
   display: grid;
   grid-gap: 20px;
-  border: 1px solid blue;
 }
 </style>

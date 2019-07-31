@@ -1,6 +1,6 @@
 <template>
   <div class="word-item" @click="handleClick">
-    <h3>{{synonym}}</h3>
+    <h3 class="synonym">{{synonym}}</h3>
   </div>
 </template>
 
@@ -25,11 +25,20 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.synonym {
+  font-weight: normal;
+  color: #008cff;
+  padding: 0 5px;
+  background-color: #efefef;
+}
+
+.word-item {
+  cursor: pointer;
+  margin: 10px;
+}
+
 .word-item:hover {
   cursor: pointer;
-}
-.expanded {
-  border: 1px solid red;
 }
 </style>
